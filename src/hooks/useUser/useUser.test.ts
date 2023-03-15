@@ -57,8 +57,11 @@ describe("Given a useUser custom hook", () => {
   });
 
   describe("When loginUser function is invoked with email 'alex@gmail.com' and password 'alex4321'", () => {
+    beforeEach(() => {
+      server.resetHandlers(...errorHandlers);
+    });
+
     test("Then it should call the errorToast function", async () => {
-      server.use(...errorHandlers);
       const {
         result: {
           current: { loginUser },

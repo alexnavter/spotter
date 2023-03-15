@@ -2,7 +2,7 @@ import { useAppSelector } from "../../store/hooks";
 import ProtectedRoute from "./ProtectedRoute";
 import { screen } from "@testing-library/react";
 import * as ReactRouterDom from "react-router-dom";
-import { renderRouterWithProviders } from "../../utils/testUtils/renderRouterWithProviders";
+import renderRouterWithProviders from "../../utils/testUtils/renderRouterWithProviders";
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
