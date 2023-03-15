@@ -6,7 +6,7 @@ import renderRouterWithProviders from "../../utils/testUtils/renderRouterWithPro
 describe("Given an App component", () => {
   describe("When it renders", () => {
     test("Then it should display a Loader component", () => {
-      renderRouterWithProviders(<App />, preloadedStateLoading);
+      renderRouterWithProviders(preloadedStateLoading, <App />);
 
       const loader = screen.getByLabelText("progress-bar-loading");
 

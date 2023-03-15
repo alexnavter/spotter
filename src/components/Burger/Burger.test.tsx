@@ -6,7 +6,7 @@ import renderRouterWithProviders from "../../utils/testUtils/renderRouterWithPro
 describe("Given a Burger component", () => {
   describe("When rendered", () => {
     test("It should render a button with the class 'logout', the text 'Log out'", () => {
-      renderRouterWithProviders(<Burger />);
+      renderRouterWithProviders({}, <Burger />);
 
       const burgerButton = screen.getByRole("button");
 
@@ -16,7 +16,7 @@ describe("Given a Burger component", () => {
 
   describe("When the burger menu is clicked", () => {
     test("Then it should show a menu on the side with the text 'Home' as a link", async () => {
-      renderRouterWithProviders(<Burger />);
+      renderRouterWithProviders({}, <Burger />);
 
       const burgerButton = screen.getByRole("button", { name: "Open Menu" });
       await act(async () => await userEvent.click(burgerButton));

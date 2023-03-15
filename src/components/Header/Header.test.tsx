@@ -9,7 +9,7 @@ describe("Given a Header component", () => {
     test("It should display a heading with a title with the text 'Spotter'", () => {
       const expectedText = "Spotter";
 
-      renderRouterWithProviders(<Header />);
+      renderRouterWithProviders({}, <Header />);
 
       const logoTitle = screen.getByRole("heading", { name: expectedText });
 
@@ -19,7 +19,7 @@ describe("Given a Header component", () => {
 
   describe("When the burger menu is clicked", () => {
     test("Then it should show a menu on the side with the text 'Home' as a link", async () => {
-      renderRouterWithProviders(<Burger />);
+      renderRouterWithProviders({}, <Burger />);
 
       const burgerButton = screen.getByRole("button", { name: "Open Menu" });
       await act(async () => await userEvent.click(burgerButton));
