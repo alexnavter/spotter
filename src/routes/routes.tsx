@@ -15,7 +15,7 @@ const routes: RouteObject[] = [
       { path: "/", element: <ProtectedRoute element={<HomePage />} /> },
       {
         path: endpoints.myExercises,
-        element: <MyExercisesPage />,
+        element: <ProtectedRoute element={<MyExercisesPage />} />,
       },
     ],
   },
