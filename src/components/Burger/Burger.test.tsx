@@ -1,7 +1,7 @@
 import Burger from "./Burger";
 import { act, screen } from "@testing-library/react";
-import { renderRouterWithProviders } from "../../utils/testUtils/renderRouterWithProviders";
 import userEvent from "@testing-library/user-event";
+import renderRouterWithProviders from "../../utils/testUtils/renderRouterWithProviders";
 
 describe("Given a Burger component", () => {
   describe("When rendered", () => {

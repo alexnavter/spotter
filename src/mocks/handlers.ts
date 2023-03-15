@@ -4,7 +4,9 @@ import { mockExercises } from "./mocks";
 const routes = {
   users: "/users",
   login: "/login",
+
   exercises: "/exercises",
+  getExercises: "/exercises",
 };
 
 const apiUrl = process.env.REACT_APP_URL_API!;
@@ -27,6 +29,7 @@ export const errorHandlers = [
   rest.get(`${apiUrl}${routes.exercises}`, (req, res, ctx) => {
     return res(ctx.status(500));
   }),
+
   rest.post(`${apiUrl}${routes.users}${routes.login}`, (req, rest, ctx) => {
     return rest(ctx.status(401));
   }),

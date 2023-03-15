@@ -14,6 +14,7 @@ export interface ExerciseStructure {
   reps: number;
   rest: number;
   duration: number;
+  createdBy: string;
 }
 
 export interface ExercisesData {

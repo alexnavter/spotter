@@ -20,6 +20,7 @@ export const mockBenchPress: ExerciseStructure = {
   rest: 60,
   duration: 0,
   image: "https://cdn.mos.cms.futurecdn.net/pLaRi5jXSHDKu6WRydetBo-1200-80.jpg",
+  createdBy: "Alex",
 };
 
 export const mockSquat: ExerciseStructure = {
@@ -39,6 +40,7 @@ export const mockSquat: ExerciseStructure = {
   rest: 90,
   duration: 0,
   image: "https://example.com/squat.jpg",
+  createdBy: "Alex",
 };
 
 export const mockExercises: ExercisesData = {

@@ -1,7 +1,7 @@
 import LoginPage from "./LoginPage";
 import { screen } from "@testing-library/react";
-import { renderRouterWithProviders } from "../../utils/testUtils/renderRouterWithProviders";
 import * as ReactRouterDom from "react-router-dom";
+import renderRouterWithProviders from "../../utils/testUtils/renderRouterWithProviders";
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),

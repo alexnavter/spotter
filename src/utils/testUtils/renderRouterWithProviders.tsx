@@ -4,7 +4,7 @@ import { getRouter, router } from "../../routes/routes";
 import { RootState } from "../../store/store";
 import renderWithProviders from "./renderWithProviders";
 
-export const renderRouterWithProviders = (
+const renderRouterWithProviders = (
   ui?: React.ReactElement,
   preloadedState?: PreloadedState<RootState>
 ) => {
@@ -15,4 +15,5 @@ export const renderRouterWithProviders = (
     preloadedState
   );
 };
-export default renderWithProviders;
+
+export default renderRouterWithProviders;

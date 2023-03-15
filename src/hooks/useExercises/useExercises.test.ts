@@ -7,15 +7,11 @@ import { store } from "../../store/store";
 import Wrapper from "../../utils/Wrapper";
 import useExercises from "./useExercises";
 
-beforeAll(() => {
-  jest.clearAllMocks();
-});
-
 afterEach(() => {
   jest.clearAllMocks();
 });
 
-const spyDispatch = jest.spyOn(store, "dispatch");
+const spy = jest.spyOn(store, "dispatch");
 
 describe("Given a useExercises custom hook", () => {
   describe("When the getExercises function is called", () => {
@@ -28,16 +24,18 @@ describe("Given a useExercises custom hook", () => {
 
       await getExercises();
 
-      expect(spyDispatch).toHaveBeenCalledWith(
+      expect(spy).toHaveBeenCalledWith(
         loadExercisesActionCreator(mockExercises.exercises)
       );
     });
   });
 
-  describe("When the getExercise function is called, but the response from the request sent is failsed", () => {
-    test("Then the dispatch should not be called", async () => {
+  describe("When the getExercises function is called and the reponse from the request is failed", () => {
+    beforeEach(() => {
       server.resetHandlers(...errorHandlers);
+    });
 
+    test("Then it should not call the dispatch", async () => {
       const {
         result: {
           current: { getExercises },
@@ -46,7 +44,60 @@ describe("Given a useExercises custom hook", () => {
 
       await getExercises();
 
-      expect(spyDispatch).not.toHaveBeenCalled();
+      expect(spy).not.toHaveBeenCalledWith(
+        loadExercisesActionCreator(mockExercises.exercises)
+      );
+    });
+  });
+
+  describe("When the getUserExercises function is called", () => {
+    beforeEach(() => {
+      global.fetch = jest.fn().mockResolvedValue({
+        ok: true,
+        json: jest.fn().mockResolvedValue({}),
+      });
+    });
+
+    test("Then it should make a request with an Authorization header", async () => {
+      const token = "";
+      const {
+        result: {
+          current: { getUserExercises },
+        },
+      } = renderHook(() => useExercises(), { wrapper: Wrapper });
+
+      await getUserExercises();
+
+      const apiUrl = process.env.REACT_APP_URL_API;
+      const exercisesEndpoint = "/exercises";
+      const userExercisesEndpoint = "/my-exercises";
+
+      expect(global.fetch).toHaveBeenCalledWith(
+        `${apiUrl}${exercisesEndpoint}${userExercisesEndpoint}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    });
+  });
+
+  describe("When the getUserExercises function is called and an error occurs", () => {
+    beforeEach(() => {
+      server.resetHandlers(...errorHandlers);
+    });
+
+    test("Then it should invoke the dispatch", async () => {
+      const {
+        result: {
+          current: { getUserExercises },
+        },
+      } = renderHook(() => useExercises(), { wrapper: Wrapper });
+
+      await getUserExercises();
+
+      expect(spy).toHaveBeenCalled();
     });
   });
 });

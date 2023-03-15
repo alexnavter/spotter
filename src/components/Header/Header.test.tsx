@@ -1,8 +1,8 @@
 import Header from "./Header";
 import { act, screen } from "@testing-library/react";
-import { renderRouterWithProviders } from "../../utils/testUtils/renderRouterWithProviders";
 import userEvent from "@testing-library/user-event";
 import Burger from "../Burger/Burger";
+import renderRouterWithProviders from "../../utils/testUtils/renderRouterWithProviders";
 
 describe("Given a Header component", () => {
   describe("When it renders", () => {
