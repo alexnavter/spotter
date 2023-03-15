@@ -22,7 +22,7 @@ describe("Given a ProtectedRoute component", () => {
 
       const component = <div>Login page</div>;
 
-      renderRouterWithProviders(<ProtectedRoute element={component} />);
+      renderRouterWithProviders({}, <ProtectedRoute element={component} />);
 
       const expectedComponent = screen.getByText("Login page");
 
@@ -34,7 +34,7 @@ describe("Given a ProtectedRoute component", () => {
     test("Then it should show the component that it is receiving with props", () => {
       const component = <div>Login page</div>;
 
-      renderRouterWithProviders(<ProtectedRoute element={component} />);
+      renderRouterWithProviders({}, <ProtectedRoute element={component} />);
 
       expect(ReactRouterDom.Navigate).toHaveBeenCalled();
     });

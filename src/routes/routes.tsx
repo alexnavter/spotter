@@ -24,4 +24,8 @@ export const getRouter = (ui: React.ReactElement) =>
       path: "/",
       element: ui,
     },
+    {
+      path: "/login",
+      element: <></>,
+    },
   ]);
