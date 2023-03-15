@@ -1,6 +1,7 @@
 import CardList from "../../components/CardList/CardList";
 import { useEffect } from "react";
 import useExercises from "../../hooks/useExercises/useExercises";
+import MyExercisesPageStyled from "./MyExercisesPageStyled";
 const MyExercisesPage = (): JSX.Element => {
   const { getUserExercises } = useExercises();
 
@@ -10,8 +11,11 @@ const MyExercisesPage = (): JSX.Element => {
 
   return (
     <>
-      <h2>My exercises</h2>
-      <CardList />
+      <MyExercisesPageStyled>
+        <h2 className="title">My exercises</h2>
+        <span className="line"></span>
+        <CardList />
+      </MyExercisesPageStyled>
     </>
   );
 };
