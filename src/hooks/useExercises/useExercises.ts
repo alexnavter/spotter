@@ -1,6 +1,12 @@
 import { useCallback } from "react";
-import { loadExercisesActionCreator } from "../../store/features/exercises/exercisesSlice";
-import { ExercisesData } from "../../store/features/exercises/types";
+import {
+  deleteExerciseActionCreator,
+  loadExercisesActionCreator,
+} from "../../store/features/exercises/exercisesSlice";
+import {
+  ExercisesData,
+  ExerciseStructure,
+} from "../../store/features/exercises/types";
 import {
   setIsLoadingActionCreator,
   unSetIsLoadingActionCreator,
@@ -10,6 +16,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 const apiUrl = process.env.REACT_APP_URL_API;
 const exercisesEndpoint = "/exercises";
 const userExercisesEndpoint = "/my-exercises";
+const deleteExerciseEndpoint = "/delete/";
 
 const useExercises = () => {
   const dispatch = useAppDispatch();
@@ -56,7 +63,36 @@ const useExercises = () => {
     }
   }, [dispatch, token]);
 
-  return { getExercises, getUserExercises };
+  const deleteExercise = useCallback(
+    async (exercise: ExerciseStructure) => {
+      try {
+        dispatch(setIsLoadingActionCreator());
+
+        const response = await fetch(
+          `${apiUrl}${deleteExerciseEndpoint}${exercise.id}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Exercise could not be deleted");
+        }
+
+        dispatch(unSetIsLoadingActionCreator());
+        dispatch(deleteExerciseActionCreator(exercise));
+      } catch (error) {
+        dispatch(unSetIsLoadingActionCreator());
+        return (error as Error).message;
+      }
+    },
+    [dispatch, token]
+  );
+
+  return { getExercises, getUserExercises, deleteExercise };
 };
 
 export default useExercises;
