@@ -4,7 +4,7 @@ import {
 } from "../store/features/exercises/types";
 
 export const mockBenchPress: ExerciseStructure = {
-  id: "1",
+  id: "marcelino1234",
   name: "Bench Press",
   type: "Upper body",
   equipment: "Barbell, Bench",

@@ -25,7 +25,7 @@ const mockUserCredentials: UserCredentials = {
 };
 
 const mockTokenPayload: CustomTokenPayload = {
-  id: "2845723",
+  sub: "2845723",
   email: "alex@gmail.com",
 };
 
@@ -45,7 +45,7 @@ describe("Given a useUser custom hook", () => {
       );
 
       const mockUserLogin: User = {
-        id: mockTokenPayload.id,
+        id: mockTokenPayload.sub,
         email: mockUserCredentials.email,
         token: mockToken,
       };
