@@ -34,7 +34,7 @@ const useUser = (): UseUserStructure => {
 
       const tokenPayload: CustomTokenPayload = decodeToken(token);
 
-      const { id, email } = tokenPayload;
+      const { sub: id, email } = tokenPayload;
 
       const logUser: User = {
         email,

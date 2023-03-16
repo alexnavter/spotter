@@ -1,8 +1,11 @@
 import { renderHook } from "@testing-library/react";
-import { errorHandlers } from "../../mocks/handlers";
-import { mockExercises } from "../../mocks/mocks";
+import { deleteHandlers, errorHandlers, handlers } from "../../mocks/handlers";
+import { mockBenchPress, mockExercises } from "../../mocks/mocks";
 import { server } from "../../mocks/server";
-import { loadExercisesActionCreator } from "../../store/features/exercises/exercisesSlice";
+import {
+  deleteExerciseActionCreator,
+  loadExercisesActionCreator,
+} from "../../store/features/exercises/exercisesSlice";
 import { store } from "../../store/store";
 import Wrapper from "../../utils/Wrapper";
 import useExercises from "./useExercises";
@@ -11,11 +14,34 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-const spy = jest.spyOn(store, "dispatch");
+beforeAll(() => {
+  jest.clearAllMocks();
+});
+
+const spyDispatch = jest.spyOn(store, "dispatch");
+
+describe("Given a useExercise", () => {
+  describe("When the deleteExercise function is called", () => {
+    test("Then it should call the dispatch with the action to delete an exercise", async () => {
+      server.use(...deleteHandlers);
+      const {
+        result: {
+          current: { deleteExercise },
+        },
+      } = renderHook(() => useExercises(), { wrapper: Wrapper });
+
+      await deleteExercise(mockBenchPress);
+
+      expect(spyDispatch).toHaveBeenCalledWith(
+        deleteExerciseActionCreator(mockBenchPress)
+      );
+    });
+  });
+});
 
 describe("Given a useExercises custom hook", () => {
   describe("When the getExercises function is called", () => {
-    test("Then it should call the dispatch", async () => {
+    test("Then it should call the dispatch with the action to load exercises", async () => {
       const {
         result: {
           current: { getExercises },
@@ -24,7 +50,7 @@ describe("Given a useExercises custom hook", () => {
 
       await getExercises();
 
-      expect(spy).toHaveBeenCalledWith(
+      expect(spyDispatch).toHaveBeenCalledWith(
         loadExercisesActionCreator(mockExercises.exercises)
       );
     });
@@ -44,7 +70,7 @@ describe("Given a useExercises custom hook", () => {
 
       await getExercises();
 
-      expect(spy).not.toHaveBeenCalledWith(
+      expect(spyDispatch).not.toHaveBeenCalledWith(
         loadExercisesActionCreator(mockExercises.exercises)
       );
     });
@@ -97,7 +123,25 @@ describe("Given a useExercises custom hook", () => {
 
       await getUserExercises();
 
-      expect(spy).toHaveBeenCalled();
+      expect(spyDispatch).toHaveBeenCalled();
+    });
+  });
+
+  describe("When the deleteExercise function is called and an error occurs", () => {
+    beforeEach(() => {
+      server.resetHandlers(...errorHandlers);
+    });
+
+    test("Then it should invoke the dispatch", async () => {
+      const {
+        result: {
+          current: { deleteExercise },
+        },
+      } = renderHook(() => useExercises(), { wrapper: Wrapper });
+
+      await deleteExercise(mockBenchPress);
+
+      expect(spyDispatch).toHaveBeenCalled();
     });
   });
 });

@@ -13,10 +13,9 @@ import {
 } from "../../store/features/ui/uiSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
-const apiUrl = process.env.REACT_APP_URL_API;
+const apiUrl = process.env.REACT_APP_URL_API!;
 const exercisesEndpoint = "/exercises";
 const userExercisesEndpoint = "/my-exercises";
-const deleteExerciseEndpoint = "/delete/";
 
 const useExercises = () => {
   const dispatch = useAppDispatch();
@@ -69,7 +68,7 @@ const useExercises = () => {
         dispatch(setIsLoadingActionCreator());
 
         const response = await fetch(
-          `${apiUrl}${deleteExerciseEndpoint}${exercise.id}`,
+          `${apiUrl}/exercises/delete/${exercise.id}`,
           {
             method: "DELETE",
             headers: {
@@ -79,7 +78,7 @@ const useExercises = () => {
         );
 
         if (!response.ok) {
-          throw new Error("Exercise could not be deleted");
+          throw new Error("The exercise couldn't be deleted");
         }
 
         dispatch(unSetIsLoadingActionCreator());

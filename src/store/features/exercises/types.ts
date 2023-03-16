@@ -17,8 +17,8 @@ export interface ExerciseStructure {
   createdBy: string;
 }
 
-export interface ExercisesData {
-  exercises: ExercisesStructure;
-}
+export type Exercises = ExerciseStructure[];
 
-export type ExercisesStructure = ExerciseStructure[];
+export interface ExercisesData {
+  exercises: Exercises;
+}
