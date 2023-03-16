@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ExercisesData, ExercisesStructure } from "./types";
+import { ExercisesData, ExercisesStructure, ExerciseStructure } from "./types";
 
 const initialState: ExercisesData = {
   exercises: [],
@@ -13,9 +13,22 @@ const exercisesSlice = createSlice({
       currentExerciseState,
       action: PayloadAction<ExercisesStructure>
     ) => ({ ...currentExerciseState, exercises: action.payload }),
+    deleteExercise: (
+      currentExerciseState,
+      action: PayloadAction<ExerciseStructure>
+    ) => {
+      const newExercises = currentExerciseState.exercises.filter(
+        (exercise) => exercise.id !== action.payload.id
+      );
+
+      return { exercises: newExercises };
+    },
   },
 });
 
-export const { loadExercises: loadExercisesActionCreator } =
-  exercisesSlice.actions;
+export const {
+  loadExercises: loadExercisesActionCreator,
+  deleteExercise: deleteExerciseActionCreator,
+} = exercisesSlice.actions;
+
 export const exercisesReducer = exercisesSlice.reducer;
