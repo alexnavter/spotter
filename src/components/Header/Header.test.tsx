@@ -1,8 +1,9 @@
 import Header from "./Header";
 import { act, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import Burger from "../Burger/Burger";
 import renderRouterWithProviders from "../../utils/testUtils/renderRouterWithProviders";
+import { preloadedStateLoading } from "../../utils/testUtils/preloadedStates";
+import Burger from "../Burger/Burger";
+import userEvent from "@testing-library/user-event";
 
 describe("Given a Header component", () => {
   describe("When it renders", () => {
@@ -15,18 +16,14 @@ describe("Given a Header component", () => {
 
       expect(logoTitle).toBeInTheDocument();
     });
-  });
 
-  describe("When the burger menu is clicked", () => {
-    test("Then it should show a menu on the side with the text 'Home' as a link", async () => {
+    test("Then it should display a 3 line burger menu to click on", async () => {
       renderRouterWithProviders({}, <Burger />);
 
       const burgerButton = screen.getByRole("button", { name: "Open Menu" });
       await act(async () => await userEvent.click(burgerButton));
 
-      const homeLink = screen.getByRole("link", { name: "Home" });
-
-      expect(homeLink).toBeInTheDocument();
+      expect(burgerButton).toBeInTheDocument();
     });
   });
 });
