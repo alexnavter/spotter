@@ -4,9 +4,9 @@ import HeaderStyled from "./HeaderStyled";
 const Header = (): JSX.Element => {
   return (
     <HeaderStyled>
-      <div className="header">
+      <header className="header">
         <h1 className="logo">Spotter</h1>
-      </div>
+      </header>
       <Burger />
     </HeaderStyled>
   );

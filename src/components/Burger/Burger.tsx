@@ -13,8 +13,8 @@ const Burger = (): JSX.Element => {
               <Link className="menu-item" to={"/"}>
                 Home
               </Link>
-              <Link className="menu-item" to={"/"}>
-                Favourites
+              <Link className="menu-item" to={"/my-exercises"}>
+                My exercises
               </Link>
               <Link className="menu-item" to={"/"}>
                 Create
