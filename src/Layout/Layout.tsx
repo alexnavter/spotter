@@ -5,9 +5,11 @@ import { useAppSelector } from "../store/hooks";
 
 const Layout = (): JSX.Element => {
   const { isLoading } = useAppSelector((state) => state.ui);
+  const { isLogged } = useAppSelector((state) => state.user);
+
   return (
     <>
-      <Header />
+      {isLogged && <Header />}
       <main>
         {isLoading && <Loader />}
         <Outlet />
