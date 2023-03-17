@@ -37,6 +37,7 @@ const Card = ({ exercise }: ExerciseCardProps): JSX.Element => {
                   className="heading__bin-container"
                   action={() => deleteExercise(exercise)}
                   children={deleteIcon}
+                  ariaLabel={"delete"}
                 ></Button>
               )}
               <FontAwesomeIcon icon={faHeart} className="heading__heart" />
