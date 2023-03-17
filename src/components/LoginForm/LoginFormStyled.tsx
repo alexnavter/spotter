@@ -45,6 +45,17 @@ const LoginFormStyled = styled.div`
       font-size: 20px;
       font-weight: 700;
       margin-top: 10px;
+
+      border-radius: 10px;
+      border: solid 2px red;
+      padding: 0.8rem;
+      width: 100%;
+
+      :disabled {
+        :disabled {
+          opacity: 70%;
+        }
+      }
     }
 
     .register {

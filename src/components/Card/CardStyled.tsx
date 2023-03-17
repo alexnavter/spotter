@@ -8,7 +8,7 @@ const CardStyled = styled.div`
   flex-direction: column;
   .exercise {
     &__container {
-      padding: 10px 15px 15px;
+      padding: 10px 10px 15px;
     }
 
     &__image {
@@ -20,6 +20,7 @@ const CardStyled = styled.div`
     &__heading {
       display: flex;
       justify-content: space-between;
+      align-items: center;
     }
 
     &__data {
@@ -32,12 +33,26 @@ const CardStyled = styled.div`
     &__title {
       font-family: ${(props) => props.theme.fonts.secondary};
       color: ${(props) => props.theme.colors.black};
-      font-weight: 700;
-      font-size: 1.8rem;
+      font-weight: 800;
+      font-size: 1.5rem;
     }
 
-    &__icon {
+    &__icons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    &__heart {
       color: ${(props) => props.theme.colors.app};
+      font-size: 2.1rem;
+    }
+
+    &__bin-container {
+      background: transparent;
+    }
+
+    &__bin {
+      color: ${(props) => props.theme.colors.grey};
       font-size: 2.1rem;
     }
   }
@@ -50,6 +65,7 @@ const CardStyled = styled.div`
 
     &__title {
       color: ${(props) => props.theme.colors.black};
+      font-weight: 600;
     }
 
     &__value {

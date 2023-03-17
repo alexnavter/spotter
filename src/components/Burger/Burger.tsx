@@ -38,7 +38,7 @@ const Burger = (): JSX.Element => {
               </Link>
               <div className="button">
                 <Button
-                  className={"logout"}
+                  className="logout"
                   text={"Log out"}
                   action={() => {
                     closeMenu();
