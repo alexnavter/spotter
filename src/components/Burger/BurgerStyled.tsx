@@ -13,6 +13,18 @@ const BurgerStyled = styled.div`
     font-size: 2rem;
     font-family: ${(props) => props.theme.fonts.secondary};
     justify-content: center;
+
+    border-radius: 10px;
+    border: solid 2px red;
+    padding: 0.8rem;
+    width: 100%;
+    color: black;
+
+    :disabled {
+      :disabled {
+        opacity: 70%;
+      }
+    }
   }
 
   /* Wrapper for item list */
