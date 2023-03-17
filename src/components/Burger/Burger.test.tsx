@@ -100,7 +100,7 @@ describe("Given a Burger component", () => {
   });
 
   describe("When the burger is opened and the user logs out by clicking the sign out button", () => {
-    test.only("Then the logoutUser function should be invoked", async () => {
+    test("Then the logoutUser function should be invoked", async () => {
       const setIsOpen = jest.fn();
       jest.spyOn(React, "useState").mockImplementation(() => [true, setIsOpen]);
 
