@@ -1,7 +1,10 @@
 import { useAppDispatch } from "../../store/hooks";
 import { LoginResponse, UserCredentials } from "./types";
 import decodeToken from "jwt-decode";
-import { loginUserActionCreator } from "../../store/features/users/userSlice";
+import {
+  loginUserActionCreator,
+  logoutUserActionCreator,
+} from "../../store/features/users/userSlice";
 import { User } from "../../store/features/users/types";
 import { CustomTokenPayload } from "../../types/types";
 import {
@@ -10,13 +13,17 @@ import {
   setIsLoadingActionCreator,
   unSetIsLoadingActionCreator,
 } from "../../store/features/ui/uiSlice";
+import useToken from "../useToken/useToken";
 
 interface UseUserStructure {
   loginUser: (userCredentials: UserCredentials) => Promise<void>;
+  logoutUser: () => void;
 }
 
 const useUser = (): UseUserStructure => {
   const dispatch = useAppDispatch();
+
+  const { removeToken } = useToken();
 
   const apiUrl = process.env.REACT_APP_URL_API;
 
@@ -36,13 +43,13 @@ const useUser = (): UseUserStructure => {
 
       const { sub: id, email } = tokenPayload;
 
-      const logUser: User = {
+      const logUserIn: User = {
         email,
         token,
         id,
       };
 
-      dispatch(loginUserActionCreator(logUser));
+      dispatch(loginUserActionCreator(logUserIn));
       localStorage.setItem("token", token);
       dispatch(unSetIsLoadingActionCreator());
     } catch {
@@ -55,7 +62,13 @@ const useUser = (): UseUserStructure => {
       dispatch(unSetIsLoadingActionCreator());
     }
   };
-  return { loginUser };
+
+  const logoutUser = () => {
+    removeToken();
+    dispatch(logoutUserActionCreator());
+  };
+
+  return { loginUser, logoutUser };
 };
 
 export default useUser;
