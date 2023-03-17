@@ -8,6 +8,7 @@ import {
   ExerciseStructure,
 } from "../../store/features/exercises/types";
 import {
+  displayModalActionCreator,
   setIsLoadingActionCreator,
   unSetIsLoadingActionCreator,
 } from "../../store/features/ui/uiSlice";
@@ -35,7 +36,12 @@ const useExercises = () => {
       dispatch(loadExercisesActionCreator(exercises));
     } catch (error) {
       dispatch(unSetIsLoadingActionCreator());
-      return (error as Error).message;
+      dispatch(
+        displayModalActionCreator({
+          isError: true,
+          message: (error as Error).message,
+        })
+      );
     }
   }, [dispatch]);
 
@@ -46,11 +52,16 @@ const useExercises = () => {
       const response = await fetch(
         `${apiUrl}${exercisesEndpoint}${userExercisesEndpoint}`,
         {
+          method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
+
+      if (!response.ok) {
+        throw new Error("We couldn't your retrieve exercises");
+      }
 
       const { exercises } = (await response.json()) as ExercisesData;
 
@@ -58,7 +69,12 @@ const useExercises = () => {
       dispatch(loadExercisesActionCreator(exercises));
     } catch (error) {
       dispatch(unSetIsLoadingActionCreator());
-      return (error as Error).message;
+      dispatch(
+        displayModalActionCreator({
+          isError: true,
+          message: "We couldn't retrieve your exercises",
+        })
+      );
     }
   }, [dispatch, token]);
 
@@ -85,7 +101,12 @@ const useExercises = () => {
         dispatch(deleteExerciseActionCreator(exercise));
       } catch (error) {
         dispatch(unSetIsLoadingActionCreator());
-        return (error as Error).message;
+        dispatch(
+          displayModalActionCreator({
+            isError: true,
+            message: "The exercise couldn't be deleted",
+          })
+        );
       }
     },
     [dispatch, token]

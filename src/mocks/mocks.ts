@@ -1,4 +1,5 @@
 import {
+  Exercises,
   ExercisesData,
   ExerciseStructure,
 } from "../store/features/exercises/types";
@@ -46,3 +47,5 @@ export const mockSquat: ExerciseStructure = {
 export const mockExercises: ExercisesData = {
   exercises: [mockBenchPress, mockSquat],
 };
+
+export const mockExercisesList: Exercises = [mockBenchPress, mockSquat];

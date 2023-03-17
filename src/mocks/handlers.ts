@@ -6,12 +6,12 @@ const routes = {
   login: "/login",
 
   exercises: "/exercises",
-  getExercises: "/exercises",
+  myExercises: "/my-exercises",
   delete: "/delete/",
   id: "marcelino1234",
 };
 
-const apiUrl = process.env.REACT_APP_URL_API!;
+export const apiUrl = process.env.REACT_APP_URL_API!;
 
 export const handlers = [
   rest.get(`${apiUrl}${routes.exercises}`, async (req, res, ctx) => {
@@ -27,7 +27,19 @@ export const handlers = [
   ),
 ];
 
-export const deleteHandlers = [
+export const errorGetUserExercisesHandler = [
+  rest.get(`${apiUrl}/exercises/my-exercises`, (req, res, ctx) =>
+    res(ctx.status(400))
+  ),
+];
+
+export const errorHandlers = [
+  rest.post(`${apiUrl}${routes.users}${routes.login}`, (req, rest, ctx) => {
+    return rest(ctx.status(401));
+  }),
+];
+
+export const successDeleteHandler = [
   rest.delete(
     `${apiUrl}/exercises/delete/marcelino1234`,
     async (req, res, ctx) => {
@@ -36,18 +48,14 @@ export const deleteHandlers = [
   ),
 ];
 
-export const errorHandlers = [
-  rest.get(`${apiUrl}${routes.exercises}`, (req, res, ctx) => {
-    return res(ctx.status(500));
-  }),
-
-  rest.post(`${apiUrl}${routes.users}${routes.login}`, (req, rest, ctx) => {
-    return rest(ctx.status(401));
-  }),
-
+export const errorDeleteHandler = [
   rest.delete(
-    `${apiUrl}${routes.exercises}${routes.delete}${routes.id}`,
-    (req, res, ctx) =>
-      res(ctx.status(401), ctx.json({ message: "Unauthoraised" }))
+    `${apiUrl}/exercises/delete/marcelino1234`,
+    async (req, res, ctx) => {
+      return res(
+        ctx.status(500),
+        ctx.json({ error: "The exercise couldn't be deleted" })
+      );
+    }
   ),
 ];

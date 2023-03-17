@@ -8,7 +8,7 @@ import LoginPageStyled from "./LoginPageStyled";
 
 const LoginPage = (): JSX.Element => {
   const { isLogged } = useAppSelector((state) => state.user);
-  const { modal } = useAppSelector((state) => state.ui);
+  const { message: modal } = useAppSelector((state) => state.ui);
 
   useEffect(() => {
     if (modal) {
