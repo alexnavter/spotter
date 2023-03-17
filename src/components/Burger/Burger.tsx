@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { slide as Menu } from "react-burger-menu";
 import { Link } from "react-router-dom";
+import useUser from "../../hooks/useUser/useUser";
 import Button from "../Button/Button";
 import BurgerStyled from "./BurgerStyled";
 
 const Burger = (): JSX.Element => {
+  const { logoutUser } = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const closeMenu = () => {
     setIsOpen(false);
@@ -35,7 +37,14 @@ const Burger = (): JSX.Element => {
                 Create
               </Link>
               <div className="button">
-                <Button className={"logout"} text={"Log out"} />
+                <Button
+                  className={"logout"}
+                  text={"Log out"}
+                  action={() => {
+                    closeMenu();
+                    logoutUser();
+                  }}
+                />
               </div>
             </div>
           </div>
