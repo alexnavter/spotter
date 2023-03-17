@@ -15,7 +15,10 @@ import {
   deleteExerciseActionCreator,
   loadExercisesActionCreator,
 } from "../../store/features/exercises/exercisesSlice";
-import { displayModalActionCreator } from "../../store/features/ui/uiSlice";
+import {
+  displayModalActionCreator,
+  unSetIsLoadingActionCreator,
+} from "../../store/features/ui/uiSlice";
 import { store } from "../../store/store";
 import Wrapper from "../../utils/Wrapper";
 import useExercises from "./useExercises";
@@ -88,6 +91,18 @@ describe("Given a useExercises custom hook", () => {
       expect(spyDispatch).toHaveBeenCalledWith(
         loadExercisesActionCreator(mockExercises.exercises)
       );
+    });
+
+    test("Then it should call the dispatch with the action unSetIsLoading", async () => {
+      const {
+        result: {
+          current: { getExercises },
+        },
+      } = renderHook(() => useExercises(), { wrapper: Wrapper });
+
+      await getExercises();
+
+      expect(spyDispatch).toHaveBeenCalledWith(unSetIsLoadingActionCreator());
     });
   });
 
