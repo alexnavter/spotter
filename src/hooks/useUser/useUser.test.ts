@@ -88,4 +88,20 @@ describe("Given a useUser custom hook", () => {
       );
     });
   });
+
+  describe("When the logoutUser function is invoked", () => {
+    test("Then the dispatch should be called with the logoutUser action creator", async () => {
+      const {
+        result: {
+          current: { logoutUser },
+        },
+      } = renderHook(() => useUser(), {
+        wrapper: Wrapper,
+      });
+
+      await act(async () => logoutUser());
+
+      expect(spy).toHaveBeenCalled();
+    });
+  });
 });
