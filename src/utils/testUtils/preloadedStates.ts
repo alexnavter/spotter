@@ -10,11 +10,11 @@ export const preloadedStateLoggedIn = {
 };
 
 export const preloadedStateToast = {
-  ui: { modal: "Wrong credentials", isError: true, isLoading: false },
+  ui: { message: "Wrong credentials", isError: true, isLoading: false },
 };
 
 export const preloadedStateLoading = {
-  ui: { isLoading: true, isError: false, modal: "" },
+  ui: { isLoading: true, isError: false, message: "" },
 };
 
 export const preloadedStateExercises = {

@@ -27,7 +27,7 @@ describe("Given a Login Page", () => {
     test("Then it should display this modal with the text 'Wrong credentials'", async () => {
       await renderRouterWithProviders(
         {
-          ui: { modal: "Wrong credentials", isError: true, isLoading: false },
+          ui: { message: "Wrong credentials", isError: true, isLoading: false },
         },
         <LoginPage />
       );

@@ -12,12 +12,12 @@ describe("Given a uiReducer", () => {
   describe("When its displayModal action creator is invoked, with the text 'Wrong credentials' and its property isError true", () => {
     test("Then it should set to modal the text 'Wrong crendentials' and set property isError to true", () => {
       const modal: ModalPayload = {
-        modal: "Wrong credentials.",
+        message: "Wrong credentials.",
         isError: true,
       };
 
       const expectedUiState: UiState = {
-        modal: modal.modal,
+        message: modal.message,
         isError: modal.isError,
         isLoading: false,
       };
@@ -33,7 +33,7 @@ describe("Given a uiReducer", () => {
         const expectedUiState: UiState = {
           isError: false,
           isLoading: true,
-          modal: "",
+          message: "",
         };
 
         const newUiState = uiReducer(initialState, setIsLoadingActionCreator());
@@ -48,13 +48,13 @@ describe("Given a uiReducer", () => {
       const expectedUiState: UiState = {
         isError: false,
         isLoading: false,
-        modal: "",
+        message: "",
       };
 
       const currentUiState: UiState = {
         isError: false,
         isLoading: true,
-        modal: "",
+        message: "",
       };
 
       const newUiState = uiReducer(
@@ -71,7 +71,7 @@ describe("Given a uiReducer", () => {
       const expectedUiState: UiState = {
         isError: false,
         isLoading: false,
-        modal: "",
+        message: "",
       };
 
       const newModalState = uiReducer(initialState, resetModalActionCreator());
