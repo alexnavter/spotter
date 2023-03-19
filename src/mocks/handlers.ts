@@ -28,9 +28,15 @@ export const handlers = [
 ];
 
 export const errorGetUserExercisesHandler = [
-  rest.get(`${apiUrl}/exercises/my-exercises`, (req, res, ctx) =>
-    res(ctx.status(400))
-  ),
+  rest.get(`${apiUrl}/exercises/my-exercises`, (req, rest, ctx) => {
+    rest(ctx.status(400));
+  }),
+];
+
+export const errorCreateExerciseHandler = [
+  rest.post(`${apiUrl}/exercises/create`, (req, rest, ctx) => {
+    return rest(ctx.status(400));
+  }),
 ];
 
 export const errorHandlers = [

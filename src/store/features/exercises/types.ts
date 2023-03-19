@@ -1,24 +1,23 @@
-export interface ExerciseStructure {
-  id: string;
+export interface ExerciseCreationStructure {
   name: string;
-  image: string;
-  type: "Upper body" | "Lower body";
+  type: string;
   equipment: string;
   difficulty: number;
-  muscles: {
-    primary: string;
-    secondary: string[];
-  };
+  muscles: string;
   description: string;
   sets: number;
   reps: number;
   rest: number;
   duration: number;
-  createdBy: string;
+  image: string;
 }
 
-export type Exercises = ExerciseStructure[];
-
+export interface ExerciseDataStructure extends ExerciseCreationStructure {
+  id: string;
+  createdBy: string;
+}
 export interface ExercisesData {
   exercises: Exercises;
 }
+
+export type Exercises = ExerciseDataStructure[];

@@ -1,13 +1,17 @@
 import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import endpoints from "../../routes/types";
 import {
   deleteExerciseActionCreator,
   loadExercisesActionCreator,
 } from "../../store/features/exercises/exercisesSlice";
 import {
   ExercisesData,
-  ExerciseStructure,
+  ExerciseDataStructure,
+  ExerciseCreationStructure,
 } from "../../store/features/exercises/types";
 import {
+  closeModalActionCreator,
   displayModalActionCreator,
   setIsLoadingActionCreator,
   unSetIsLoadingActionCreator,
@@ -21,6 +25,7 @@ const userExercisesEndpoint = "/my-exercises";
 const useExercises = () => {
   const dispatch = useAppDispatch();
   const { token } = useAppSelector((state) => state.user);
+  const navigationTo = useNavigate();
 
   const getExercises = useCallback(async () => {
     try {
@@ -79,7 +84,7 @@ const useExercises = () => {
   }, [dispatch, token]);
 
   const deleteExercise = useCallback(
-    async (exercise: ExerciseStructure) => {
+    async (exercise: ExerciseDataStructure) => {
       try {
         dispatch(setIsLoadingActionCreator());
 
@@ -112,7 +117,50 @@ const useExercises = () => {
     [dispatch, token]
   );
 
-  return { getExercises, getUserExercises, deleteExercise };
+  const createExercise = useCallback(
+    async (exercise: ExerciseCreationStructure) => {
+      try {
+        dispatch(closeModalActionCreator());
+        dispatch(setIsLoadingActionCreator());
+
+        const response = await fetch(`${apiUrl}/exercises/create`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-type": "multipart/form-data",
+          },
+          body: JSON.stringify(exercise),
+        });
+
+        if (!response.ok) {
+          const errorMessage = "Could not create the exercise. Try again.";
+
+          throw new Error(errorMessage);
+        }
+
+        dispatch(unSetIsLoadingActionCreator());
+        navigationTo(endpoints.myExercises);
+        dispatch(
+          displayModalActionCreator({
+            message: "Exercise successfully created",
+            isError: false,
+          })
+        );
+      } catch (error: unknown) {
+        dispatch(unSetIsLoadingActionCreator());
+        dispatch(
+          displayModalActionCreator({
+            message: "Could not create the exercise. Try again.",
+            isError: true,
+          })
+        );
+        dispatch(unSetIsLoadingActionCreator());
+      }
+    },
+    [dispatch, navigationTo, token]
+  );
+
+  return { getExercises, getUserExercises, deleteExercise, createExercise };
 };
 
 export default useExercises;

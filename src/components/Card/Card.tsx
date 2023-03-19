@@ -1,13 +1,13 @@
 import { faHeart, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useExercises from "../../hooks/useExercises/useExercises";
-import { ExerciseStructure } from "../../store/features/exercises/types";
+import { ExerciseDataStructure } from "../../store/features/exercises/types";
 import { useAppSelector } from "../../store/hooks";
 import Button from "../Button/Button";
 import CardStyled from "./CardStyled";
 
 interface ExerciseCardProps {
-  exercise: ExerciseStructure;
+  exercise: ExerciseDataStructure;
 }
 
 const Card = ({ exercise }: ExerciseCardProps): JSX.Element => {
@@ -49,19 +49,13 @@ const Card = ({ exercise }: ExerciseCardProps): JSX.Element => {
               <span className="data__value">{exercise.type}</span>
             </div>
             <div className="data-container">
-              <span className="data__title">Primary muscle: </span>
-              <span className="data__value">{exercise.muscles.primary}</span>
+              <span className="data__title">Muscles: </span>
+              <span className="data__value">{exercise.muscles}</span>
             </div>
-            <div className="data-container">
-              <span className="data__title">Secondary muscles: </span>
-              <span className="data__value">
-                {exercise.muscles.secondary[0]} {exercise.muscles.secondary[1]}
-              </span>
-            </div>
-            <div className="data-container">
-              <span className="data__title">Difficulty: </span>
-              <span className="data__value">{exercise.difficulty}</span>
-            </div>
+          </div>
+          <div className="data-container">
+            <span className="data__title">Difficulty: </span>
+            <span className="data__value">{exercise.difficulty}</span>
           </div>
         </div>
       </CardStyled>

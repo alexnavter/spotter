@@ -5,7 +5,7 @@ import {
   uiReducer,
   setIsLoadingActionCreator,
   unSetIsLoadingActionCreator,
-  resetModalActionCreator,
+  closeModalActionCreator,
 } from "./uiSlice";
 
 describe("Given a uiReducer", () => {
@@ -74,7 +74,7 @@ describe("Given a uiReducer", () => {
         message: "",
       };
 
-      const newModalState = uiReducer(initialState, resetModalActionCreator());
+      const newModalState = uiReducer(initialState, closeModalActionCreator());
 
       expect(newModalState).toStrictEqual(expectedUiState);
     });
