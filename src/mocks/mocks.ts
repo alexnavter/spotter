@@ -1,19 +1,16 @@
 import {
   Exercises,
   ExercisesData,
-  ExerciseStructure,
+  ExerciseDataStructure,
 } from "../store/features/exercises/types";
 
-export const mockBenchPress: ExerciseStructure = {
+export const mockBenchPress: ExerciseDataStructure = {
   id: "marcelino1234",
   name: "Bench Press",
   type: "Upper body",
   equipment: "Barbell, Bench",
   difficulty: 3,
-  muscles: {
-    primary: "Chest",
-    secondary: ["Triceps", "Shoulders"],
-  },
+  muscles: "Chest",
   description:
     "Lie on a bench with a barbell, lower it to your chest, and then push it back up.",
   sets: 3,
@@ -24,16 +21,13 @@ export const mockBenchPress: ExerciseStructure = {
   createdBy: "Alex",
 };
 
-export const mockSquat: ExerciseStructure = {
+export const mockSquat: ExerciseDataStructure = {
   id: "2",
   name: "Squat",
   type: "Lower body",
   equipment: "Barbell, Power Rack",
   difficulty: 4,
-  muscles: {
-    primary: "Quadriceps",
-    secondary: ["Glutes", "Hamstrings"],
-  },
+  muscles: "Quadriceps",
   description:
     "Place a barbell on your shoulders behind your neck, bend your knees to lower your hips until your thighs are parallel to the floor, then extend your legs to return to standing.",
   sets: 3,
