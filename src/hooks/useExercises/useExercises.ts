@@ -11,8 +11,8 @@ import {
   ExerciseCreationStructure,
 } from "../../store/features/exercises/types";
 import {
+  closeModalActionCreator,
   displayModalActionCreator,
-  resetModalActionCreator,
   setIsLoadingActionCreator,
   unSetIsLoadingActionCreator,
 } from "../../store/features/ui/uiSlice";
@@ -120,7 +120,7 @@ const useExercises = () => {
   const createExercise = useCallback(
     async (exercise: ExerciseCreationStructure) => {
       try {
-        dispatch(resetModalActionCreator());
+        dispatch(closeModalActionCreator());
         dispatch(setIsLoadingActionCreator());
 
         const response = await fetch(`${apiUrl}/exercises/create`, {
@@ -150,10 +150,11 @@ const useExercises = () => {
         dispatch(unSetIsLoadingActionCreator());
         dispatch(
           displayModalActionCreator({
-            message: (error as Error).message,
+            message: "Could not create the exercise. Try again.",
             isError: true,
           })
         );
+        dispatch(unSetIsLoadingActionCreator());
       }
     },
     [dispatch, navigationTo, token]

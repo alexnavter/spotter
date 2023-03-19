@@ -9,7 +9,7 @@ import { User } from "../../store/features/users/types";
 import { CustomTokenPayload } from "../../types/types";
 import {
   displayModalActionCreator,
-  resetModalActionCreator,
+  closeModalActionCreator,
   setIsLoadingActionCreator,
   unSetIsLoadingActionCreator,
 } from "../../store/features/ui/uiSlice";
@@ -28,7 +28,7 @@ const useUser = (): UseUserStructure => {
   const apiUrl = process.env.REACT_APP_URL_API;
 
   const loginUser = async (userCredentials: UserCredentials) => {
-    dispatch(resetModalActionCreator());
+    dispatch(closeModalActionCreator());
     try {
       dispatch(setIsLoadingActionCreator());
       const response = await fetch(`${apiUrl}/users/login`, {

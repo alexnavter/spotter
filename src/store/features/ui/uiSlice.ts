@@ -41,5 +41,5 @@ export const {
   displayModal: displayModalActionCreator,
   setIsLoading: setIsLoadingActionCreator,
   unSetIsLoading: unSetIsLoadingActionCreator,
-  closeModal: resetModalActionCreator,
+  closeModal: closeModalActionCreator,
 } = uiSlice.actions;

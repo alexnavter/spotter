@@ -4,6 +4,7 @@ import {
   errorHandlers,
   errorDeleteHandler,
   errorGetUserExercisesHandler,
+  errorCreateExerciseHandler,
 } from "../../mocks/handlers";
 import {
   mockBenchPress,
@@ -34,6 +35,16 @@ beforeAll(() => {
 beforeEach(() => {
   jest.resetAllMocks();
 });
+
+beforeEach(() => {
+  server.resetHandlers();
+});
+
+const mockUseNavigate = jest.fn();
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockUseNavigate,
+}));
 
 const spyDispatch = jest.spyOn(store, "dispatch");
 
@@ -174,6 +185,41 @@ describe("Given a useExercises custom hook", () => {
 
       expect(spyDispatch).not.toHaveBeenCalledWith(
         loadExercisesActionCreator(mockExercisesList)
+      );
+    });
+  });
+
+  describe("When the createExercise function is called", () => {
+    test("Then it should call the dispatch with the display modal action and the message 'Exercise successfully created'", async () => {
+      const {
+        result: {
+          current: { createExercise },
+        },
+      } = renderHook(() => useExercises(), { wrapper: Wrapper });
+
+      await createExercise(mockBenchPress);
+
+      expect(spyDispatch).toHaveBeenCalled();
+    });
+  });
+
+  describe("When it is called with wrong data", () => {
+    test("Then it should call the dispatch with the display modal action, isError true and the modal mesage of 'Exercise successfully created'", async () => {
+      server.use(...errorCreateExerciseHandler);
+      const {
+        result: {
+          current: { createExercise },
+        },
+      } = renderHook(() => useExercises(), { wrapper: Wrapper });
+
+      await createExercise(mockBenchPress);
+
+      expect(spyDispatch).toHaveBeenNthCalledWith(
+        4,
+        displayModalActionCreator({
+          message: "Could not create the exercise. Try again.",
+          isError: true,
+        })
       );
     });
   });

@@ -1,13 +1,13 @@
 import { faHeart, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useExercises from "../../hooks/useExercises/useExercises";
-import { ExerciseCreationStructure } from "../../store/features/exercises/types";
+import { ExerciseDataStructure } from "../../store/features/exercises/types";
 import { useAppSelector } from "../../store/hooks";
 import Button from "../Button/Button";
 import CardStyled from "./CardStyled";
 
 interface ExerciseCardProps {
-  exercise: ExerciseCreationStructure;
+  exercise: ExerciseDataStructure;
 }
 
 const Card = ({ exercise }: ExerciseCardProps): JSX.Element => {

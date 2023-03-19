@@ -9,7 +9,7 @@ export interface ExerciseCreationStructure {
   reps: number;
   rest: number;
   duration: number;
-  image: File | string;
+  image: string;
 }
 
 export interface ExerciseDataStructure extends ExerciseCreationStructure {
