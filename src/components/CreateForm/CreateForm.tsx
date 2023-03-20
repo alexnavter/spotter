@@ -1,57 +1,123 @@
 import { useState } from "react";
 import useExercises from "../../hooks/useExercises/useExercises";
-import { useAppSelector } from "../../store/hooks";
+import { ExerciseCreationStructure } from "../../store/features/exercises/types";
 import Button from "../Button/Button";
 import CreateFormStyled from "./CreateFormStyled";
 
 const CreateForm = (): JSX.Element => {
-  const { id } = useAppSelector((state) => state.user);
   const { createExercise } = useExercises();
-  const [createData, setCreateData] = useState({
-    name: "",
-    type: "",
-    equipment: "",
-    difficulty: 0,
-    muscles: "",
-    description: "",
-    sets: 0,
-    reps: 0,
-    rest: 0,
-    duration: 0,
-    image: "",
-    createdBy: id,
-  });
 
-  const handleCreateDataChange = (
-    event:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLSelectElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setCreateData({
-      ...createData,
-      [event.target.name]: event.target.value,
-    });
+  const [name, setName] = useState("");
+  const [type, setType] = useState("");
+  const [equipment, setEquipment] = useState("");
+  const [difficulty, setDifficulty] = useState("");
+  const [muscles, setMuscles] = useState("");
+  const [description, setDescription] = useState("");
+  const [sets, setSets] = useState("");
+  const [reps, setReps] = useState("");
+  const [rest, setRest] = useState("");
+  const [duration, setDuration] = useState("");
+  const [image, setImage] = useState<File | string>("");
+
+  const handleName = ({
+    target: { value },
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    setName(value);
+  };
+
+  const handleType = ({
+    target: { value },
+  }: React.ChangeEvent<HTMLSelectElement>) => {
+    setType(value);
+  };
+
+  const handleEquipment = ({
+    target: { value },
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    setEquipment(value);
+  };
+
+  const handleDifficulty = ({
+    target: { value },
+  }: React.ChangeEvent<HTMLSelectElement>) => {
+    setDifficulty(value);
+  };
+
+  const handleMuscles = ({
+    target: { value },
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    setMuscles(value);
+  };
+
+  const handleDescription = ({
+    target: { value },
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    setDescription(value);
+  };
+
+  const handleSets = ({
+    target: { value },
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    setSets(value);
+  };
+
+  const handleReps = ({
+    target: { value },
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    setReps(value);
+  };
+
+  const handleRest = ({
+    target: { value },
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    setRest(value);
+  };
+
+  const handleDuration = ({
+    target: { value },
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    setDuration(value);
+  };
+
+  const handleImage = ({
+    target: { files },
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    if (files !== null) {
+      setImage(files[0]);
+    }
   };
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    await createExercise(createData);
+    const newExercise: ExerciseCreationStructure = {
+      name,
+      type,
+      equipment,
+      difficulty,
+      muscles,
+      description,
+      sets,
+      reps,
+      rest,
+      duration,
+      image,
+    };
+    await createExercise(newExercise);
   };
 
   const isDisabled =
-    createData.name === "" ||
-    createData.type === "" ||
-    createData.equipment === "" ||
-    createData.difficulty === 0 ||
-    createData.muscles === "" ||
-    createData.description === "" ||
-    createData.sets === 0 ||
-    createData.reps === 0 ||
-    createData.rest === 0 ||
-    createData.duration === 0 ||
-    createData.image === "";
+    name === "" ||
+    type === "" ||
+    equipment === "" ||
+    difficulty === "" ||
+    muscles === "" ||
+    description === "" ||
+    sets === "" ||
+    reps === "" ||
+    rest === "" ||
+    duration === "" ||
+    image === "";
 
   return (
     <CreateFormStyled
@@ -72,7 +138,7 @@ const CreateForm = (): JSX.Element => {
           name="name"
           aria-label="name"
           required
-          onChange={handleCreateDataChange}
+          onChange={handleName}
         ></input>
       </div>
 
@@ -84,7 +150,7 @@ const CreateForm = (): JSX.Element => {
             name="type"
             aria-label="type"
             required
-            onChange={handleCreateDataChange}
+            onChange={handleType}
           >
             <option value="select">Type</option>
             <option value="upper body">Upper body</option>
@@ -100,7 +166,7 @@ const CreateForm = (): JSX.Element => {
             name="difficulty"
             aria-label="difficutly"
             required
-            onChange={handleCreateDataChange}
+            onChange={handleDifficulty}
           >
             <option value="select">Difficulty</option>
             <option value="1">1</option>
@@ -121,7 +187,7 @@ const CreateForm = (): JSX.Element => {
           name="equipment"
           aria-label="equipment"
           required
-          onChange={handleCreateDataChange}
+          onChange={handleEquipment}
         ></input>
       </div>
       <div className="create-form__container container">
@@ -133,7 +199,7 @@ const CreateForm = (): JSX.Element => {
           name="muscles"
           aria-label="muscles"
           required
-          onChange={handleCreateDataChange}
+          onChange={handleMuscles}
         ></input>
       </div>
       <div className="create-form__container container">
@@ -145,7 +211,7 @@ const CreateForm = (): JSX.Element => {
           name="description"
           aria-label="description"
           required
-          onChange={handleCreateDataChange}
+          onChange={handleDescription}
         ></input>
       </div>
       <div className="container-form__pair pair">
@@ -158,7 +224,7 @@ const CreateForm = (): JSX.Element => {
             name="sets"
             aria-label="sets"
             required
-            onChange={handleCreateDataChange}
+            onChange={handleSets}
           ></input>
         </div>
         <div className="create-form__container container">
@@ -170,7 +236,7 @@ const CreateForm = (): JSX.Element => {
             name="reps"
             aria-label="reps"
             required
-            onChange={handleCreateDataChange}
+            onChange={handleReps}
           ></input>
         </div>
       </div>
@@ -184,7 +250,7 @@ const CreateForm = (): JSX.Element => {
             name="rest"
             aria-label="rest"
             required
-            onChange={handleCreateDataChange}
+            onChange={handleRest}
           ></input>
         </div>
         <div className="create-form__container container">
@@ -196,7 +262,7 @@ const CreateForm = (): JSX.Element => {
             name="duration"
             aria-label="duration"
             required
-            onChange={handleCreateDataChange}
+            onChange={handleDuration}
           ></input>
         </div>
       </div>
@@ -209,7 +275,7 @@ const CreateForm = (): JSX.Element => {
           name="image"
           aria-label="image"
           required
-          onChange={handleCreateDataChange}
+          onChange={handleImage}
         ></input>
       </div>
 

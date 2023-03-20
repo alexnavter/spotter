@@ -23,7 +23,7 @@ const Card = ({ exercise }: ExerciseCardProps): JSX.Element => {
       <CardStyled className="exercise">
         <img
           className="exercise__image"
-          src={exercise.image}
+          src={exercise.image.toString()}
           alt={exercise.name}
           width={350}
           height={225}
