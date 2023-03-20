@@ -104,6 +104,12 @@ const useExercises = () => {
 
         dispatch(unSetIsLoadingActionCreator());
         dispatch(deleteExerciseActionCreator(exercise));
+        dispatch(
+          displayModalActionCreator({
+            message: "Exercise deleted successfully",
+            isError: false,
+          })
+        );
       } catch (error) {
         dispatch(unSetIsLoadingActionCreator());
         dispatch(
