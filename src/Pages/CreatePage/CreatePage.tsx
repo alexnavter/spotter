@@ -1,7 +1,14 @@
 import CreateForm from "../../components/CreateForm/CreateForm";
+import CreatePageStyled from "./CreatePageStyled";
 
 const CreatePage = (): JSX.Element => {
-  return <CreateForm />;
+  return (
+    <>
+      <CreatePageStyled>
+        <CreateForm />
+      </CreatePageStyled>
+    </>
+  );
 };
 
 export default CreatePage;

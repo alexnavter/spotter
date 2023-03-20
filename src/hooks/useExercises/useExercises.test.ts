@@ -215,7 +215,7 @@ describe("Given a useExercises custom hook", () => {
       await createExercise(mockBenchPress);
 
       expect(spyDispatch).toHaveBeenNthCalledWith(
-        4,
+        3,
         displayModalActionCreator({
           message: "Could not create the exercise. Try again.",
           isError: true,
