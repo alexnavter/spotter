@@ -1,5 +1,5 @@
 export interface ModalPayload {
-  message: string;
+  modal: string;
   isError: boolean;
 }
 
