@@ -47,9 +47,9 @@ const LoginFormStyled = styled.div`
       margin-top: 10px;
 
       border-radius: 10px;
-      border: solid 2px red;
       padding: 0.8rem;
       width: 100%;
+      height: 50px;
 
       :disabled {
         :disabled {
