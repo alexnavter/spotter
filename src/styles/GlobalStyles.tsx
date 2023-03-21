@@ -37,6 +37,10 @@ button, input {
   font-size:inherit;
   border: none;
 }
+
+textarea:focus, input:focus, select:focus{
+    outline: none;
+}
   
 button {
   cursor: pointer;

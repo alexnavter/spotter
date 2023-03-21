@@ -26,11 +26,15 @@ const CreateFormStyled = styled.form`
       height: 50px;
       width: 130px;
       border-radius: 10px;
-      border: solid 2px ${(props) => props.theme.colors.app};
+      border: solid 2px ${(props) => props.theme.colors.grey};
       padding: 0.5rem;
       font-size: 1rem;
       background-color: ${(props) => props.theme.colors.black};
       color: ${(props) => props.theme.colors.white};
+
+      :focus {
+        border: solid 2px ${(props) => props.theme.colors.app};
+      }
     }
   }
 
@@ -57,7 +61,7 @@ const CreateFormStyled = styled.form`
     &__input {
       height: 50px;
       border-radius: 10px;
-      border: solid 2px ${(props) => props.theme.colors.app};
+      border: solid 2px ${(props) => props.theme.colors.grey};
       padding: 0.8rem;
       background-color: ${(props) => props.theme.colors.black};
       color: ${(props) => props.theme.colors.white};
@@ -66,6 +70,10 @@ const CreateFormStyled = styled.form`
         font-family: ${(props) => props.theme.fonts.secondary};
         color: ${(props) => props.theme.colors.grey};
         font-size: 1.1rem;
+      }
+
+      :focus {
+        border: solid 2px ${(props) => props.theme.colors.app};
       }
 
       &--select {
