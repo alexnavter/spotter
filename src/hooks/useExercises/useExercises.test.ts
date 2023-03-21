@@ -6,6 +6,7 @@ import {
   errorGetUserExercisesHandler,
   errorCreateExerciseHandler,
   successCreateExerciseHandler,
+  successGetExerciseById,
 } from "../../mocks/handlers";
 import {
   mockBenchPress,
@@ -15,6 +16,7 @@ import {
 import { server } from "../../mocks/server";
 import {
   deleteExerciseActionCreator,
+  loadExerciseByIdActionCreator,
   loadExercisesActionCreator,
 } from "../../store/features/exercises/exercisesSlice";
 import {
@@ -173,6 +175,46 @@ describe("Given a useExercises custom hook", () => {
         3,
         displayModalActionCreator({
           modal: "Could not create the exercise. Try again.",
+          isError: true,
+        })
+      );
+    });
+  });
+});
+
+describe("Given a useExercises hook and the findExerciseById function", () => {
+  describe("When the findExerciseById is called", () => {
+    test("Then it should call the dispatch with the load exercise by id action", async () => {
+      server.use(...successGetExerciseById);
+      const {
+        result: {
+          current: { findExerciseById },
+        },
+      } = renderHook(() => useExercises(), { wrapper: Wrapper });
+
+      await findExerciseById(mockBenchPress.id);
+
+      expect(spyDispatch).toHaveBeenCalled();
+    });
+  });
+
+  describe("When the response answers with an error", () => {
+    beforeEach(() => {
+      server.resetHandlers(...errorHandlers);
+    });
+
+    test("Then it should call the display modal action with an error", async () => {
+      const {
+        result: {
+          current: { findExerciseById },
+        },
+      } = renderHook(() => useExercises(), { wrapper: Wrapper });
+
+      await findExerciseById(mockBenchPress.id);
+
+      expect(spyDispatch).toHaveBeenCalledWith(
+        displayModalActionCreator({
+          modal: "Could not display the exercise selected",
           isError: true,
         })
       );

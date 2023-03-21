@@ -33,6 +33,13 @@ export const successCreateExerciseHandler = [
   ),
 ];
 
+export const successGetExerciseById = [
+  rest.get(
+    `${process.env.REACT_APP_URL_API}/exercises/detail/marcelino1234`,
+    (req, res, ctx) => res(ctx.status(200), ctx.json(mockBenchPress))
+  ),
+];
+
 export const errorGetUserExercisesHandler = [
   rest.get(`${apiUrl}/exercises/my-exercises`, (req, rest, ctx) => {
     rest(ctx.status(400));
