@@ -1,6 +1,6 @@
-import { ExerciseCreationStructure } from "../../store/features/exercises/types";
+import { ExerciseCreateStructure } from "../../store/features/exercises/types";
 
-const formData = (event: ExerciseCreationStructure) => {
+const formData = (event: ExerciseCreateStructure) => {
   const data = new FormData();
   data.append("name", event.name);
   data.append("type", event.type);

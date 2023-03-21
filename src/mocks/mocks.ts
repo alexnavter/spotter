@@ -1,8 +1,8 @@
 import {
-  Exercises,
+  ExercisesDataStructure,
   ExercisesData,
   ExerciseDataStructure,
-  ExerciseCreationStructure,
+  ExerciseCreateStructure,
 } from "../store/features/exercises/types";
 
 export const mockBenchPress: ExerciseDataStructure = {
@@ -39,7 +39,7 @@ export const mockSquat: ExerciseDataStructure = {
   createdBy: "Alex",
 };
 
-export const mockExerciseCreate: ExerciseCreationStructure = {
+export const mockExerciseCreate: ExerciseCreateStructure = {
   name: "DB bench press",
   type: "Upper body",
   equipment: "Dumbells, Power Rack",
@@ -76,4 +76,7 @@ export const mockExercises: ExercisesData = {
   },
 };
 
-export const mockExercisesList: Exercises = [mockBenchPress, mockSquat];
+export const mockExercisesList: ExercisesDataStructure = [
+  mockBenchPress,
+  mockSquat,
+];

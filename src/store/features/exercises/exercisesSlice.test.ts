@@ -5,9 +5,9 @@ import {
   loadExerciseByIdActionCreator,
   loadExercisesActionCreator,
 } from "./exercisesSlice";
-import { ExercisesData, Exercises } from "./types";
+import { ExercisesData, ExercisesDataStructure } from "./types";
 
-const exercises: Exercises = [mockBenchPress, mockSquat];
+const exercises: ExercisesDataStructure = [mockBenchPress, mockSquat];
 
 const initialState: ExercisesData = {
   exercises: [],
