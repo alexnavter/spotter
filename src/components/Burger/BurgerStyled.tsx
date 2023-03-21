@@ -13,9 +13,10 @@ const BurgerStyled = styled.div`
     font-size: 2rem;
     font-family: ${(props) => props.theme.fonts.secondary};
     justify-content: center;
+    align-items: center;
+    height: 65px;
 
     border-radius: 10px;
-    border: solid 2px red;
     padding: 0.8rem;
     width: 100%;
     color: black;
@@ -90,7 +91,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   /* General sidebar styles */
   .bm-menu {
     background: ${(props) => props.theme.colors.black};
-    border-left: solid 1px ${(props) => props.theme.colors.app};
+    border-left: solid 2px ${(props) => props.theme.colors.app};
     padding: 2.5em 1.5em 0;
     font-size: 1.15em;
   }

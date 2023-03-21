@@ -52,10 +52,11 @@ const Card = ({ exercise }: ExerciseCardProps): JSX.Element => {
               <span className="data__title">Muscles: </span>
               <span className="data__value">{exercise.muscles}</span>
             </div>
-          </div>
-          <div className="data-container">
-            <span className="data__title">Difficulty: </span>
-            <span className="data__value">{exercise.difficulty}</span>
+
+            <div className="data-container">
+              <span className="data__title">Difficulty: </span>
+              <span className="data__value">{exercise.difficulty}</span>
+            </div>
           </div>
         </div>
       </CardStyled>

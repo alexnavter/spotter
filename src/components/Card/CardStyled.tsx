@@ -6,6 +6,7 @@ const CardStyled = styled.div`
 
   border-radius: 15px;
   flex-direction: column;
+
   .exercise {
     &__container {
       padding: 10px 10px 15px;
@@ -66,9 +67,12 @@ const CardStyled = styled.div`
     &__title {
       color: ${(props) => props.theme.colors.black};
       font-weight: 600;
+      font-size: 18px;
     }
 
     &__value {
+      font-size: 18px;
+      font-family: ${(props) => props.theme.fonts.secondary};
       color: ${(props) => props.theme.colors.grey};
     }
   }
