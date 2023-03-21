@@ -18,6 +18,7 @@ export interface ExerciseDataStructure extends ExerciseCreationStructure {
 }
 export interface ExercisesData {
   exercises: Exercises;
+  exercise: ExerciseDataStructure;
 }
 
 export type Exercises = ExerciseDataStructure[];
