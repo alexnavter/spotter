@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useExercises from "../../hooks/useExercises/useExercises";
-import { ExerciseCreationStructure } from "../../store/features/exercises/types";
+import { ExerciseCreateStructure } from "../../store/features/exercises/types";
 import Button from "../Button/Button";
 import CreateFormStyled from "./CreateFormStyled";
 
@@ -88,7 +88,7 @@ const CreateForm = (): JSX.Element => {
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const newExercise: ExerciseCreationStructure = {
+    const newExercise: ExerciseCreateStructure = {
       name,
       type,
       equipment,

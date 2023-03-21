@@ -1,8 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ExercisesData, Exercises, ExerciseDataStructure } from "./types";
+import {
+  ExercisesData,
+  ExercisesDataStructure,
+  ExerciseDataStructure,
+} from "./types";
 
 const initialState: ExercisesData = {
   exercises: [],
+  exercise: {
+    id: "",
+    name: "",
+    type: "",
+    equipment: "",
+    difficulty: "",
+    muscles: "",
+    description: "",
+    sets: "",
+    reps: "",
+    rest: "",
+    duration: "",
+    image: "",
+    createdBy: "",
+  },
 };
 
 const exercisesSlice = createSlice({
@@ -11,24 +30,31 @@ const exercisesSlice = createSlice({
   reducers: {
     loadExercises: (
       currentExerciseState,
-      action: PayloadAction<Exercises>
+      action: PayloadAction<ExercisesDataStructure>
     ) => ({ ...currentExerciseState, exercises: action.payload }),
     deleteExercise: (
       currentExerciseState,
       action: PayloadAction<ExerciseDataStructure>
-    ) => {
-      const newExercises = currentExerciseState.exercises.filter(
+    ) => ({
+      ...currentExerciseState,
+      exercises: currentExerciseState.exercises.filter(
         (exercise) => exercise.id !== action.payload.id
-      );
-
-      return { exercises: newExercises };
-    },
+      ),
+    }),
+    loadExerciseById: (
+      currentExerciseState,
+      action: PayloadAction<ExerciseDataStructure>
+    ) => ({
+      ...currentExerciseState,
+      exercise: action.payload,
+    }),
   },
 });
 
 export const {
   loadExercises: loadExercisesActionCreator,
   deleteExercise: deleteExerciseActionCreator,
+  loadExerciseById: loadExerciseByIdActionCreator,
 } = exercisesSlice.actions;
 
 export const exercisesReducer = exercisesSlice.reducer;

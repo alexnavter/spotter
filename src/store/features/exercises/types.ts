@@ -1,4 +1,4 @@
-export interface ExerciseCreationStructure {
+export interface ExerciseCreateStructure {
   name: string;
   type: string;
   equipment: string;
@@ -12,12 +12,13 @@ export interface ExerciseCreationStructure {
   image: File | string;
 }
 
-export interface ExerciseDataStructure extends ExerciseCreationStructure {
+export interface ExerciseDataStructure extends ExerciseCreateStructure {
   id: string;
   createdBy: string;
 }
 export interface ExercisesData {
-  exercises: Exercises;
+  exercises: ExercisesDataStructure;
+  exercise: ExerciseDataStructure;
 }
 
-export type Exercises = ExerciseDataStructure[];
+export type ExercisesDataStructure = ExerciseDataStructure[];

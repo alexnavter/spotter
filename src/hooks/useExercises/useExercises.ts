@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import endpoints from "../../routes/types";
 import {
   deleteExerciseActionCreator,
+  loadExerciseByIdActionCreator,
   loadExercisesActionCreator,
 } from "../../store/features/exercises/exercisesSlice";
 import {
   ExercisesData,
   ExerciseDataStructure,
-  ExerciseCreationStructure,
+  ExerciseCreateStructure,
 } from "../../store/features/exercises/types";
 import {
   displayModalActionCreator,
@@ -124,7 +125,7 @@ const useExercises = () => {
   );
 
   const createExercise = useCallback(
-    async (exercise: ExerciseCreationStructure) => {
+    async (exercise: ExerciseCreateStructure) => {
       try {
         dispatch(setIsLoadingActionCreator());
 
@@ -163,7 +164,50 @@ const useExercises = () => {
     [dispatch, navigationTo, token]
   );
 
-  return { getExercises, getUserExercises, deleteExercise, createExercise };
+  const findExerciseById = useCallback(
+    async (idExercise: string) => {
+      try {
+        dispatch(setIsLoadingActionCreator());
+        const response = await fetch(
+          `${apiUrl}/exercises/detail/${idExercise}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(
+            "We could not retrieve the exercise requested. Try later"
+          );
+        }
+
+        const { exercise } = (await response.json()) as ExercisesData;
+
+        dispatch(unSetIsLoadingActionCreator());
+        dispatch(loadExerciseByIdActionCreator(exercise));
+      } catch (error) {
+        dispatch(unSetIsLoadingActionCreator());
+        dispatch(
+          displayModalActionCreator({
+            modal: "Could not display the exercise selected",
+            isError: true,
+          })
+        );
+      }
+    },
+    [dispatch, token]
+  );
+
+  return {
+    getExercises,
+    getUserExercises,
+    deleteExercise,
+    createExercise,
+    findExerciseById,
+  };
 };
 
 export default useExercises;
