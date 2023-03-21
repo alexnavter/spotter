@@ -23,12 +23,20 @@ const exercisesSlice = createSlice({
 
       return { exercises: newExercises };
     },
+    loadExerciseById: (
+      currentExerciseState,
+      action: PayloadAction<ExerciseDataStructure>
+    ) => ({
+      ...currentExerciseState,
+      exercise: action.payload,
+    }),
   },
 });
 
 export const {
   loadExercises: loadExercisesActionCreator,
   deleteExercise: deleteExerciseActionCreator,
+  loadExerciseById: loadExerciseByIdActionCreator,
 } = exercisesSlice.actions;
 
 export const exercisesReducer = exercisesSlice.reducer;
