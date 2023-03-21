@@ -102,14 +102,14 @@ const useExercises = () => {
           throw new Error("The exercise couldn't be deleted");
         }
 
-        dispatch(unSetIsLoadingActionCreator());
-        dispatch(deleteExerciseActionCreator(exercise));
         dispatch(
           displayModalActionCreator({
             message: "Exercise deleted successfully",
             isError: false,
           })
         );
+        dispatch(deleteExerciseActionCreator(exercise));
+        dispatch(unSetIsLoadingActionCreator());
       } catch (error) {
         dispatch(unSetIsLoadingActionCreator());
         dispatch(

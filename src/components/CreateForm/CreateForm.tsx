@@ -82,9 +82,7 @@ const CreateForm = (): JSX.Element => {
   const handleImage = ({
     target: { files },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    if (files !== null) {
-      setImage(files[0]);
-    }
+    setImage(files?.[0]!);
   };
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -130,13 +128,14 @@ const CreateForm = (): JSX.Element => {
         <span className="heading__line"></span>
       </div>
       <div className="create-form__container container">
-        <label className="container__label">Exercise name</label>
+        <label className="container__label" aria-label="name">
+          Exercise name
+        </label>
         <input
+          id="name"
           className="container__input"
           placeholder="Exercise name..."
           type="text"
-          name="name"
-          aria-label="name"
           required
           onChange={handleName}
         ></input>
@@ -144,11 +143,13 @@ const CreateForm = (): JSX.Element => {
 
       <div className="container-form__pair pair">
         <div className="container-form__container container">
-          <label className="pair__label">Type</label>
+          <label className="pair__label" aria-label="type">
+            Type
+          </label>
           <select
             className="pair__input"
             name="type"
-            aria-label="type"
+            placeholder="Type..."
             required
             onChange={handleType}
           >
@@ -184,7 +185,7 @@ const CreateForm = (): JSX.Element => {
           className="container__input"
           placeholder="Equipment..."
           type="text"
-          name="equipment"
+          id="equipment"
           aria-label="equipment"
           required
           onChange={handleEquipment}
@@ -196,7 +197,7 @@ const CreateForm = (): JSX.Element => {
           className="container__input"
           placeholder="Muscles..."
           type="text"
-          name="muscles"
+          id="muscles"
           aria-label="muscles"
           required
           onChange={handleMuscles}
@@ -208,7 +209,7 @@ const CreateForm = (): JSX.Element => {
           className="container__input"
           placeholder="Description..."
           type="text"
-          name="description"
+          id="description"
           aria-label="description"
           required
           onChange={handleDescription}
@@ -221,7 +222,7 @@ const CreateForm = (): JSX.Element => {
             className="pair__input"
             placeholder="1 - 6"
             type="text"
-            name="sets"
+            id="sets"
             aria-label="sets"
             required
             onChange={handleSets}
@@ -233,7 +234,7 @@ const CreateForm = (): JSX.Element => {
             className="pair__input"
             placeholder="1 - 20"
             type="text"
-            name="reps"
+            id="reps"
             aria-label="reps"
             required
             onChange={handleReps}
@@ -245,9 +246,9 @@ const CreateForm = (): JSX.Element => {
           <label className="pair__label">Rest</label>
           <input
             className="pair__input"
-            placeholder="Seconds ..."
+            placeholder="Seconds..."
             type="text"
-            name="rest"
+            id="rest"
             aria-label="rest"
             required
             onChange={handleRest}
@@ -257,9 +258,9 @@ const CreateForm = (): JSX.Element => {
           <label className="pair__label">Duration</label>
           <input
             className="pair__input"
-            placeholder="Minutes ..."
+            placeholder="Minutes..."
             type="text"
-            name="duration"
+            id="duration"
             aria-label="duration"
             required
             onChange={handleDuration}
@@ -267,12 +268,14 @@ const CreateForm = (): JSX.Element => {
         </div>
       </div>
       <div className="create-form__container container">
-        <label className="container__label">Image</label>
+        <label className="container__label" aria-label="image">
+          Image
+        </label>
         <input
           className="container__input container_input--select"
           placeholder="Image..."
           type="file"
-          name="image"
+          id="image"
           aria-label="image"
           required
           onChange={handleImage}
@@ -283,6 +286,7 @@ const CreateForm = (): JSX.Element => {
         className="create-button"
         isDisabled={isDisabled}
         text={"Create exercise"}
+        type="submit"
       />
     </CreateFormStyled>
   );

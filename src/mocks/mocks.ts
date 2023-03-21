@@ -2,6 +2,7 @@ import {
   Exercises,
   ExercisesData,
   ExerciseDataStructure,
+  ExerciseCreationStructure,
 } from "../store/features/exercises/types";
 
 export const mockBenchPress: ExerciseDataStructure = {
@@ -36,6 +37,22 @@ export const mockSquat: ExerciseDataStructure = {
   duration: "0",
   image: "https://example.com/squat.jpg",
   createdBy: "Alex",
+};
+
+export const mockExerciseCreate: ExerciseCreationStructure = {
+  name: "DB bench press",
+  type: "Upper body",
+  equipment: "Dumbells, Power Rack",
+  difficulty: "4",
+  muscles: "Chest",
+  description: "Just do it",
+  sets: "3",
+  reps: "8",
+  rest: "90",
+  duration: "0",
+  image: new File(["exercise"], "exercise.jpg", {
+    type: "image/jpg",
+  }),
 };
 
 export const mockExercises: ExercisesData = {
