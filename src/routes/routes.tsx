@@ -5,15 +5,18 @@ import CreatePage from "../Pages/CreatePage/CreatePage";
 import HomePage from "../Pages/HomePage/HomePage";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import MyExercisesPage from "../Pages/MyExercisesPage/MyExercisesPage";
+import NotFoundPage from "../Pages/NotFoundPage/NotFoundPage";
 import endpoints from "./types";
 
 const routes: RouteObject[] = [
   {
     path: "/",
     element: <App />,
+
     children: [
-      { path: endpoints.login, element: <LoginPage /> },
       { path: "/", element: <ProtectedRoute element={<HomePage />} /> },
+      { path: endpoints.login, element: <LoginPage /> },
+      { path: "*", element: <NotFoundPage /> },
       {
         path: endpoints.myExercises,
         element: <ProtectedRoute element={<MyExercisesPage />} />,
