@@ -1,5 +1,6 @@
 import { faHeart, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 import useExercises from "../../hooks/useExercises/useExercises";
 import { ExerciseDataStructure } from "../../store/features/exercises/types";
 import { useAppSelector } from "../../store/hooks";
@@ -13,6 +14,7 @@ interface ExerciseCardProps {
 const Card = ({ exercise }: ExerciseCardProps): JSX.Element => {
   const { deleteExercise } = useExercises();
   const { id } = useAppSelector((state) => state.user);
+  const navigationTo = useNavigate();
   const isMyExercises = exercise.createdBy === id;
   const deleteIcon = (
     <FontAwesomeIcon icon={faTrashCan} className="heading__bin" />
@@ -22,6 +24,7 @@ const Card = ({ exercise }: ExerciseCardProps): JSX.Element => {
     <>
       <CardStyled className="exercise">
         <img
+          onClick={() => navigationTo(`/detail/${exercise.id}`)}
           className="exercise__image"
           src={exercise.image.toString()}
           alt={exercise.name}
