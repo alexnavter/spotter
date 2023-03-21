@@ -55,7 +55,7 @@ const useUser = (): UseUserStructure => {
     } catch {
       dispatch(
         displayModalActionCreator({
-          message: "Wrong credentials",
+          modal: "Wrong credentials",
           isError: true,
         })
       );

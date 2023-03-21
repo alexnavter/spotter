@@ -44,7 +44,7 @@ const useExercises = () => {
       dispatch(
         displayModalActionCreator({
           isError: true,
-          message: (error as Error).message,
+          modal: (error as Error).message,
         })
       );
     }
@@ -77,7 +77,7 @@ const useExercises = () => {
       dispatch(
         displayModalActionCreator({
           isError: true,
-          message: "We couldn't retrieve your exercises",
+          modal: "We couldn't retrieve your exercises",
         })
       );
     }
@@ -102,20 +102,20 @@ const useExercises = () => {
           throw new Error("The exercise couldn't be deleted");
         }
 
+        dispatch(unSetIsLoadingActionCreator());
+        dispatch(deleteExerciseActionCreator(exercise));
         dispatch(
           displayModalActionCreator({
-            message: "Exercise deleted successfully",
+            modal: "Exercise deleted successfully",
             isError: false,
           })
         );
-        dispatch(deleteExerciseActionCreator(exercise));
-        dispatch(unSetIsLoadingActionCreator());
       } catch (error) {
         dispatch(unSetIsLoadingActionCreator());
         dispatch(
           displayModalActionCreator({
             isError: true,
-            message: "The exercise couldn't be deleted",
+            modal: "The exercise couldn't be deleted",
           })
         );
       }
@@ -144,7 +144,7 @@ const useExercises = () => {
         dispatch(unSetIsLoadingActionCreator());
         dispatch(
           displayModalActionCreator({
-            message: "Exercise successfully created",
+            modal: "Exercise successfully created",
             isError: false,
           })
         );
@@ -153,7 +153,7 @@ const useExercises = () => {
         dispatch(unSetIsLoadingActionCreator());
         dispatch(
           displayModalActionCreator({
-            message: "Could not create the exercise. Try again.",
+            modal: "Could not create the exercise. Try again.",
             isError: true,
           })
         );

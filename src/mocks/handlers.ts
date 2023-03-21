@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import { mockExercises } from "./mocks";
+import { mockBenchPress, mockExercises } from "./mocks";
 
 const routes = {
   users: "/users",
@@ -24,6 +24,12 @@ export const handlers = [
 
   rest.post(`${apiUrl}${routes.users}${routes.login}`, async (req, res, ctx) =>
     res(ctx.status(200), ctx.json({ token: "sda123-asd1!23.da?34" }))
+  ),
+];
+
+export const successCreateExerciseHandler = [
+  rest.post(`${apiUrl}/exercises/create`, async (req, res, ctx) =>
+    res(ctx.status(201), ctx.json(mockBenchPress))
   ),
 ];
 

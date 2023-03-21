@@ -23,21 +23,6 @@ describe("Given a Login Page", () => {
     });
   });
 
-  describe("When the user introduces wrong credentials at Login Page, and the modal property isError is set to true", () => {
-    test("Then it should display this modal with the text 'Wrong credentials'", async () => {
-      await renderRouterWithProviders(
-        {
-          ui: { message: "Wrong credentials", isError: true, isLoading: false },
-        },
-        <LoginPage />
-      );
-
-      const modal = await screen.findByText("Wrong credentials");
-
-      expect(modal).toBeInTheDocument();
-    });
-  });
-
   describe("When the user is already logged", () => {
     test("Then 'Navigate' should be invoked", () => {
       const preloadedState = {

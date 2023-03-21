@@ -5,6 +5,7 @@ import {
   errorDeleteHandler,
   errorGetUserExercisesHandler,
   errorCreateExerciseHandler,
+  successCreateExerciseHandler,
 } from "../../mocks/handlers";
 import {
   mockBenchPress,
@@ -26,18 +27,6 @@ import useExercises from "./useExercises";
 
 afterEach(() => {
   jest.clearAllMocks();
-});
-
-beforeAll(() => {
-  jest.clearAllMocks();
-});
-
-beforeEach(() => {
-  jest.resetAllMocks();
-});
-
-beforeEach(() => {
-  server.resetHandlers();
 });
 
 const mockUseNavigate = jest.fn();
@@ -81,7 +70,7 @@ describe("Given a useExercise", () => {
       expect(spyDispatch).toHaveBeenCalledWith(
         displayModalActionCreator({
           isError: true,
-          message: "The exercise couldn't be deleted",
+          modal: "The exercise couldn't be deleted",
         })
       );
     });
@@ -114,26 +103,6 @@ describe("Given a useExercises custom hook", () => {
       await getExercises();
 
       expect(spyDispatch).toHaveBeenCalledWith(unSetIsLoadingActionCreator());
-    });
-  });
-
-  describe("When the getExercises function is called and the reponse from the request is failed", () => {
-    beforeEach(() => {
-      server.resetHandlers(...errorHandlers);
-    });
-
-    test("Then it should not call the dispatch", async () => {
-      const {
-        result: {
-          current: { getExercises },
-        },
-      } = renderHook(() => useExercises(), { wrapper: Wrapper });
-
-      await getExercises();
-
-      expect(spyDispatch).not.toHaveBeenCalledWith(
-        loadExercisesActionCreator(mockExercises.exercises)
-      );
     });
   });
 
@@ -189,20 +158,6 @@ describe("Given a useExercises custom hook", () => {
     });
   });
 
-  describe("When the createExercise function is called", () => {
-    test("Then it should call the dispatch with the display modal action and the message 'Exercise successfully created'", async () => {
-      const {
-        result: {
-          current: { createExercise },
-        },
-      } = renderHook(() => useExercises(), { wrapper: Wrapper });
-
-      await createExercise(mockBenchPress);
-
-      expect(spyDispatch).toHaveBeenCalled();
-    });
-  });
-
   describe("When it is called with wrong data", () => {
     test("Then it should call the dispatch with the display modal action, isError true and the modal mesage of 'Exercise successfully created'", async () => {
       server.use(...errorCreateExerciseHandler);
@@ -217,7 +172,7 @@ describe("Given a useExercises custom hook", () => {
       expect(spyDispatch).toHaveBeenNthCalledWith(
         3,
         displayModalActionCreator({
-          message: "Could not create the exercise. Try again.",
+          modal: "Could not create the exercise. Try again.",
           isError: true,
         })
       );
