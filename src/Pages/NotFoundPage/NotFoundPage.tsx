@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
-import Header from "../../components/Header/Header";
 import NotFoundPageStyled from "./NotFoundPageStyled";
 
 const NotFoundPage = (): JSX.Element => {
   return (
     <>
-      <Header />
       <NotFoundPageStyled className="notfound">
         <h2 className="notfound__number">404</h2>
         <h3 className="notfound__text">

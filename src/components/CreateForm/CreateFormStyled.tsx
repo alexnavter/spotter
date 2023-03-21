@@ -7,6 +7,7 @@ const CreateFormStyled = styled.form`
   height: 100%;
   gap: 25px;
   padding: 20px 0 20px;
+  width: 100%;
 
   .pair {
     display: flex;
@@ -65,6 +66,7 @@ const CreateFormStyled = styled.form`
       padding: 0.8rem;
       background-color: ${(props) => props.theme.colors.black};
       color: ${(props) => props.theme.colors.white};
+      width: 100%;
 
       ::placeholder {
         font-family: ${(props) => props.theme.fonts.secondary};
@@ -85,7 +87,6 @@ const CreateFormStyled = styled.form`
   .create-button {
     display: flex;
     background: ${(props) => props.theme.colors.app};
-    opacity: 0.8;
     font-size: 2rem;
     font-family: ${(props) => props.theme.fonts.secondary};
     justify-content: center;
@@ -94,14 +95,12 @@ const CreateFormStyled = styled.form`
     border: solid 2px red;
     padding: 0.8rem;
     width: 100%;
-    color: black;
+    color: ${(props) => props.theme.colors.white};
 
     margin-top: 20px;
 
     :disabled {
-      :disabled {
-        opacity: 70%;
-      }
+      opacity: 70%;
     }
   }
 
