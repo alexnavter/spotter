@@ -11,12 +11,12 @@ import {
   ExerciseCreationStructure,
 } from "../../store/features/exercises/types";
 import {
-  closeModalActionCreator,
   displayModalActionCreator,
   setIsLoadingActionCreator,
   unSetIsLoadingActionCreator,
 } from "../../store/features/ui/uiSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import formData from "./formData";
 
 const apiUrl = process.env.REACT_APP_URL_API!;
 const exercisesEndpoint = "/exercises";
@@ -102,8 +102,14 @@ const useExercises = () => {
           throw new Error("The exercise couldn't be deleted");
         }
 
-        dispatch(unSetIsLoadingActionCreator());
+        dispatch(
+          displayModalActionCreator({
+            message: "Exercise deleted successfully",
+            isError: false,
+          })
+        );
         dispatch(deleteExerciseActionCreator(exercise));
+        dispatch(unSetIsLoadingActionCreator());
       } catch (error) {
         dispatch(unSetIsLoadingActionCreator());
         dispatch(
@@ -120,32 +126,29 @@ const useExercises = () => {
   const createExercise = useCallback(
     async (exercise: ExerciseCreationStructure) => {
       try {
-        dispatch(closeModalActionCreator());
         dispatch(setIsLoadingActionCreator());
 
+        const data = formData(exercise);
         const response = await fetch(`${apiUrl}/exercises/create`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-type": "multipart/form-data",
           },
-          body: JSON.stringify(exercise),
+          body: data,
         });
 
         if (!response.ok) {
-          const errorMessage = "Could not create the exercise. Try again.";
-
-          throw new Error(errorMessage);
+          throw new Error("The exercise couldn't be created.");
         }
 
         dispatch(unSetIsLoadingActionCreator());
-        navigationTo(endpoints.myExercises);
         dispatch(
           displayModalActionCreator({
             message: "Exercise successfully created",
             isError: false,
           })
         );
+        navigationTo(endpoints.myExercises);
       } catch (error: unknown) {
         dispatch(unSetIsLoadingActionCreator());
         dispatch(

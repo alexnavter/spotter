@@ -33,7 +33,7 @@ const Burger = (): JSX.Element => {
               >
                 My exercises
               </Link>
-              <Link className="menu-item" onClick={closeMenu} to={"/"}>
+              <Link className="menu-item" onClick={closeMenu} to={"/create"}>
                 Create
               </Link>
               <div className="button">

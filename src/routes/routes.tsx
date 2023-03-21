@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouteObject } from "react-router-dom";
 import App from "../components/App/App";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
+import CreatePage from "../Pages/CreatePage/CreatePage";
 import HomePage from "../Pages/HomePage/HomePage";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import MyExercisesPage from "../Pages/MyExercisesPage/MyExercisesPage";
@@ -16,6 +17,10 @@ const routes: RouteObject[] = [
       {
         path: endpoints.myExercises,
         element: <ProtectedRoute element={<MyExercisesPage />} />,
+      },
+      {
+        path: endpoints.create,
+        element: <ProtectedRoute element={<CreatePage />} />,
       },
     ],
   },
