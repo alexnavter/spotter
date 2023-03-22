@@ -1,6 +1,7 @@
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { mockBenchPress } from "../../mocks/mocks";
+import { act } from "react-dom/test-utils";
 import renderRouterWithProviders from "../../utils/testUtils/renderRouterWithProviders";
 
 import Card from "./Card";
@@ -9,6 +10,13 @@ const mockDeleteExercise = jest.fn();
 
 jest.mock("../../hooks/useExercises/useExercises", () => () => ({
   deleteExercise: mockDeleteExercise,
+}));
+
+const mockNavigationTo = jest.fn();
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockNavigationTo,
 }));
 
 describe("Given a ExerciseCard component", () => {
@@ -57,6 +65,28 @@ describe("Given a ExerciseCard component", () => {
       await await userEvent.click(deleteButton);
 
       expect(mockDeleteExercise).toHaveBeenCalled();
+    });
+  });
+
+  describe("When the user clicks on the image", () => {
+    test("Then the useNavigate function should be called", async () => {
+      renderRouterWithProviders(
+        {
+          user: {
+            email: "",
+            id: "marcelino1234",
+            token: "",
+            isLogged: true,
+          },
+        },
+        <Card exercise={mockBenchPress} />
+      );
+
+      const exerciseImage = screen.getByRole("img");
+
+      await act(async () => await userEvent.click(exerciseImage));
+
+      expect(mockNavigationTo).toHaveBeenCalled();
     });
   });
 });
