@@ -154,8 +154,8 @@ const CreateForm = (): JSX.Element => {
             onChange={handleType}
           >
             <option value="select">Type</option>
-            <option value="upper body">Upper body</option>
-            <option value="lower body">Lower body</option>
+            <option value="Upper body">Upper body</option>
+            <option value="Lower body">Lower body</option>
           </select>
         </div>
 

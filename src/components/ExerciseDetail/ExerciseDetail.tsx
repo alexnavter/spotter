@@ -25,15 +25,31 @@ const ExerciseDetail = ({ exercise }: DetailProps): JSX.Element => {
           <span className="details__value">{exercise.equipment}</span>
         </div>
         <span className="details-container__line"></span>
+
         <div className="details-container__details">
-          <span className="details__value">{exercise.difficulty}</span>
-          <span className="details__value">{exercise.muscles}</span>
+          <div>
+            <span className="details__title">Difficulty: </span>
+            <span className="details__value">{exercise.difficulty}</span>
+          </div>
+          <div>
+            <span className="details__value">{exercise.muscles}</span>
+          </div>
         </div>
+
         <span className="details-container__line"></span>
         <div className="details-container__details">
-          <span className="details__value">{exercise.sets}</span>
-          <span className="details__value">{exercise.reps}</span>
-          <span className="details__value">{exercise.rest}</span>
+          <div>
+            <span className="details__title">Sets: </span>
+            <span className="details__value"> {exercise.sets}</span>
+          </div>
+          <div>
+            <span className="details__title">Reps: </span>
+            <span className="details__value"> {exercise.reps}</span>
+          </div>
+          <div>
+            <span className="details__title">Rest: </span>
+            <span className="details__value"> {exercise.rest}</span>
+          </div>
         </div>
         <span className="details-container__line"></span>
         <span className="details__value">{exercise.description}</span>

@@ -16,7 +16,6 @@ const DetailPage = (): JSX.Element => {
 
   return (
     <DetailPageStyled>
-      <h1>DETAIL PAGE</h1>
       <ExerciseDetail exercise={exercise} />
     </DetailPageStyled>
   );
