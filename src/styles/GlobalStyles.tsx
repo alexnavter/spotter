@@ -14,7 +14,6 @@ body {
   font-family: "Helvetica";
   font-size: 1rem;
   background-color: black;
-  min-height: 100vh;
   padding: 20px;
 }
 

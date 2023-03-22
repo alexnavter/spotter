@@ -10,6 +10,7 @@ declare module "styled-components" {
       app: string;
       black: string;
       white: string;
+      lightGrey: string;
       grey: string;
     };
   }

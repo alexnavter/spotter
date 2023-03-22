@@ -9,7 +9,8 @@ const theme: DefaultTheme = {
     app: "#f51e4d",
     black: "#000",
     white: "#fff",
-    grey: "#57606a",
+    lightGrey: "#9aa4b5",
+    grey: "#565a60",
   },
 };
 
